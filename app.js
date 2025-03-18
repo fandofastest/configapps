@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 // Koneksi ke MongoDB
 mongoose
   .connect(
-    "mongodb://admin:Palang66@158.178.246.223:27017/configapps?authSource=admin",
+    "mongodb://admin:Palang66@129.150.60.112:27017/configapps?authSource=admin",
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
@@ -29,7 +29,17 @@ mongoose
 const pnSchema = new mongoose.Schema({
   pn: { type: String, required: true, unique: true },
   safemode: { type: Boolean, default: true },
-  disable: { type: Boolean, default: false }, // Atribut baru 'disable'
+  disable: { type: Boolean, default: false },
+  // Atribut baru untuk admob
+  admobAppId: { type: String, default: "" },
+  admobBannerId: { type: String, default: "" },
+  admobInterstitialId: { type: String, default: "" },
+  admobRewardedId: { type: String, default: "" },
+  // Atribut baru untuk appLovin
+  appLovinSdkKey: { type: String, default: "" },
+  appLovinBannerId: { type: String, default: "" },
+  appLovinInterstitialId: { type: String, default: "" },
+  appLovinRewardedId: { type: String, default: "" },
 });
 
 const PNModel = mongoose.model("ConfigApps", pnSchema);
@@ -58,8 +68,8 @@ app.get("/api", async (req, res) => {
         status: "exists",
       });
     } else {
-      // Data belum ada, masukkan data baru dengan 'pn', 'safemode', dan 'disable'
-      const newRecord = new PNModel({ pn, safemode: true, disable: false });
+      // Data belum ada, masukkan data baru dengan 'pn' dan atribut default
+      const newRecord = new PNModel({ pn });
       await newRecord.save();
 
       res.json({

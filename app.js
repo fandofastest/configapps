@@ -31,10 +31,22 @@ const pnSchema = new mongoose.Schema({
   safemode: { type: Boolean, default: true },
   disable: { type: Boolean, default: false },
   // Atribut baru untuk admob
-  admobAppId: { type: String, default: "" },
-  admobBannerId: { type: String, default: "" },
-  admobInterstitialId: { type: String, default: "" },
-  admobRewardedId: { type: String, default: "" },
+  admobAppId: {
+    type: String,
+    default: "ca-app-pub-3940256099942544~3347511713",
+  },
+  admobBannerId: {
+    type: String,
+    default: "ca-app-pub-3940256099942544/6300978111",
+  },
+  admobInterstitialId: {
+    type: String,
+    default: "ca-app-pub-3940256099942544/1033173712",
+  },
+  admobRewardedId: {
+    type: String,
+    default: "ca-app-pub-3940256099942544/5354046379",
+  },
   // Atribut baru untuk appLovin
   appLovinSdkKey: { type: String, default: "" },
   appLovinBannerId: { type: String, default: "" },

@@ -47,11 +47,16 @@ const pnSchema = new mongoose.Schema({
     type: String,
     default: "ca-app-pub-3940256099942544/5354046379",
   },
+  admobSplashInterId: {
+    type: String,
+    default: "ca-app-pub-3940256099942544/1033173712",
+  },
   // Atribut baru untuk appLovin
   appLovinSdkKey: { type: String, default: "" },
   appLovinBannerId: { type: String, default: "" },
   appLovinInterstitialId: { type: String, default: "" },
   appLovinRewardedId: { type: String, default: "" },
+  appLovinSplashInterId: { type: String, default: "" },
 });
 
 const PNModel = mongoose.model("ConfigApps", pnSchema);
@@ -101,6 +106,10 @@ app.get("/api", async (req, res) => {
 });
 
 // Jalankan server pada port yang ditentukan
-app.listen(PORT, () => {
-  console.log(`Server berjalan di http://localhost:${PORT}`);
-});
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`Server berjalan di http://localhost:${PORT}`);
+  });
+}
+
+module.exports = app;
